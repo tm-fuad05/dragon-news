@@ -6,11 +6,16 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import NewsDetails from "../components/NewsDetails";
 import SignleDetails from "../components/SignleDetails";
+import PrivateLayout from "../layouts/PrivateLayout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomeLayout></HomeLayout>,
+    element: (
+      <PrivateLayout>
+        <HomeLayout></HomeLayout>
+      </PrivateLayout>
+    ),
     children: [
       {
         path: "",
@@ -28,7 +33,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/news",
-    element: <NewsDetails></NewsDetails>,
+    element: (
+      <PrivateLayout>
+        <NewsDetails></NewsDetails>
+      </PrivateLayout>
+    ),
 
     children: [
       {

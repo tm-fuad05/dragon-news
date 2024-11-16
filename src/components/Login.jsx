@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
@@ -7,18 +7,19 @@ import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const { signInUser, user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
   const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const pass = e.target.password.value;
     console.log(email, pass);
-
+    setError("");
     signInUser(email, pass)
       .then((result) => {
         setUser(result.user);
         navigate("/category/01");
       })
-      .catch(() => toast.error("Invalid email or password"));
+      .catch(() => setError("Invalid email or password"));
   };
 
   return (
@@ -52,6 +53,7 @@ const Login = () => {
               className="input rounded-none   bg-[#F3F3F3]"
               required
             />
+            {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
             <label className="label">
               <a href="#" className="label-text-alt link link-hover">
                 Forgot password?

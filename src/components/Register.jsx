@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Register = () => {
-  const { createUser, user, setUser, profile, updateProfileInfo } =
+  const { createUser, setUser, user, profile, updateUserProfile } =
     useContext(AuthContext);
+  console.log(user);
   console.log(profile);
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
   const handleSubmit = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -14,10 +16,20 @@ const Register = () => {
     const email = e.target.email.value;
     const pass = e.target.password.value;
 
+    setError("");
+    if (pass.length < 6) {
+      setError("Password must be at least 6 character or more");
+      return;
+    }
     createUser(email, pass)
       .then((result) => {
         setUser(result.user);
-        navigate("/auth/login");
+        navigate("/");
+        updateUserProfile({ displayName: name, photoURL: photo }).then(() => {
+          console.log("Profile updated").catch(() => {
+            console.log("Error");
+          });
+        });
       })
       .catch((error) => {
         setUser(error.message);
@@ -79,12 +91,8 @@ const Register = () => {
               className="input rounded-none   bg-[#F3F3F3]"
               required
             />
-            <label className="label">
-              <a href="#" className="label-text-alt link link-hover">
-                Forgot password?
-              </a>
-            </label>
           </div>
+          {error && <p className="text-sm text-red-500"> {error}</p>}
           <div className="form-control mt-6">
             <button className="btn  btn-neutral rounded-md">Register</button>
           </div>
