@@ -11,11 +11,7 @@ import PrivateLayout from "../layouts/PrivateLayout";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <PrivateLayout>
-        <HomeLayout></HomeLayout>
-      </PrivateLayout>
-    ),
+    element: <HomeLayout></HomeLayout>,
     children: [
       {
         path: "",

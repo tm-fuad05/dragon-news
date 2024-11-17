@@ -5,8 +5,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 const Register = () => {
   const { createUser, setUser, user, profile, updateUserProfile } =
     useContext(AuthContext);
-  console.log(user);
-  console.log(profile);
+
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const handleSubmit = (e) => {
@@ -26,9 +25,7 @@ const Register = () => {
         setUser(result.user);
         navigate("/");
         updateUserProfile({ displayName: name, photoURL: photo }).then(() => {
-          console.log("Profile updated").catch(() => {
-            console.log("Error");
-          });
+          navigate("/").catch(() => {});
         });
       })
       .catch((error) => {
@@ -96,6 +93,15 @@ const Register = () => {
           <div className="form-control mt-6">
             <button className="btn  btn-neutral rounded-md">Register</button>
           </div>
+          <p className="text-center mt-5">
+            Already have an account?{" "}
+            <Link
+              to="/auth/login"
+              className="text-[#FF8C47] font-semibold hover:text-opacity-50"
+            >
+              Login
+            </Link>
+          </p>
         </form>
       </div>
     </div>

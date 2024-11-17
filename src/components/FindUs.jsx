@@ -6,10 +6,10 @@ const FindUs = () => {
       <h2 className="font-semibold mb-3">Find Us On</h2>
       <div className="join flex join-vertical *:bg-base-100">
         <button className="btn join-item justify-start">
-          <FaFacebook></FaFacebook> Facebook
+          <FaFacebook className="text-blue-600"></FaFacebook> Facebook
         </button>
         <button className="btn join-item justify-start">
-          <FaInstagram></FaInstagram> Instagram
+          <FaInstagram className="text-orange-700"></FaInstagram> Instagram
         </button>
         <button className="btn join-item justify-start">
           <FaFacebook></FaFacebook> Facebook

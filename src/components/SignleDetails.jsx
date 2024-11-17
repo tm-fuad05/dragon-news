@@ -4,7 +4,6 @@ import { GoArrowLeft } from "react-icons/go";
 const SignleDetails = () => {
   const { data } = useLoaderData();
   const { image_url, title, details } = data[0];
-  console.log(details);
 
   return (
     <div>
